@@ -1,25 +1,44 @@
-import logo from './logo.svg';
 import './App.css';
+import Header from "./components/Header/Header";
+import AddTodo from "./components/AddTodo/AddTodo";
+import TodoList from "./components/TodoList/TodoList";
+import {useState} from "react";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [todo, setTodo] = useState([
+        {
+            id: 1,
+            title: 'Прогуляться с собакой',
+            detail: 'Захватить одноразовый пакетик',
+            status: false,
+        },
+        {
+            id: 2,
+            title: 'Зайти в магазин',
+            detail: 'Захватить авоську',
+            status: false,
+        },
+        {
+            id: 3,
+            title: 'Написать ментору',
+            detail: 'Сказать спасибо за терпение :)',
+            status: false,
+        },
+    ]);
+
+    // let now = `${new Date().toLocaleTimeString()}, ${new Date().toLocaleDateString()}`;
+    // console.log(now);
+
+
+    return (
+        <>
+            <Header/>
+            <div>
+                <AddTodo setTodo={setTodo} todo={todo}/>
+            </div>
+            <TodoList todo={todo} setTodo={setTodo}/>
+        </>
+    );
 }
 
 export default App;
