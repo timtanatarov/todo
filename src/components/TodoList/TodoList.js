@@ -1,15 +1,10 @@
 import React, {useState} from 'react';
-import { useForm } from 'react-hook-form';
+import FilesUpload from "../FilesUpload";
 
 const TodoList = ({todo, setTodo}) => {
     const [edit, setEdit] = useState(null);
     const [value, setValue] = useState('');
     const [detailValue, setDetailValue] = useState('');
-    const {register, handleSubmit} = useForm();
-
-    const onSubmit = (data) => {
-        console.log(data);
-    };
 
     let now = `Завершено в ${new Date().toLocaleTimeString()}, ${new Date().toLocaleDateString()}`;
 
@@ -74,10 +69,10 @@ const TodoList = ({todo, setTodo}) => {
                                 <div>
                                     <div>
                                         <input
-                                        ref={input}
-                                        onFocus={() => input.current.select()}
-                                        onChange={e => setValue(e.target.value)}
-                                        value={value}/>
+                                            ref={input}
+                                            onFocus={() => input.current.select()}
+                                            onChange={e => setValue(e.target.value)}
+                                            value={value}/>
                                     </div>
                                     <div>
                                         <textarea
@@ -124,12 +119,12 @@ const TodoList = ({todo, setTodo}) => {
                                     <button
                                         onClick={() => editTodo(item.id, item.title, item.detail)}>Редактировать
                                     </button>
+
                                     <div>
-                                        <form onSubmit={handleSubmit(onSubmit)}>
-                                            <input ref={register('photo', {required: true})} type='file' name='anyFile'/>
-                                            <button>Прикрепить файл</button>
-                                        </form>
+                                        <FilesUpload />
                                     </div>
+
+
                                     {
                                         item.status ?
                                             <div className='completionData'>
