@@ -1,15 +1,20 @@
 import './App.css';
-import Header from "./components/Header/Header";
 import AddTodo from "./components/AddTodo/AddTodo";
 import TodoList from "./components/TodoList/TodoList";
-import {useState} from "react";
+import React, {useState} from "react";
 
+/**
+ * Функциональная компонента todo-лист
+ * @returns {JSX.Element} - возвращает поле ввода для создания новой задачи и задачи, которые уже добавлены
+ */
 function App() {
     const [todo, setTodo] = useState([]);
 
     return (
         <>
-            <Header/>
+            <h1>
+                Todo list
+            </h1>
             <div>
                 <AddTodo setTodo={setTodo} todo={todo}/>
             </div>

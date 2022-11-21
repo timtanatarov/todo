@@ -1,10 +1,22 @@
 import React, {useState} from 'react';
 import { v1 as uuidv1 } from 'uuid';
 
+/**
+ * Функциональная компонента добавления новой задачи
+ * @param {function} setTodo - метод установки нового состояния todo
+ * @param {array} todo – состояние, в котором хранятся задачи
+ */
+
 const AddTodo = ({setTodo, todo}) => {
+
+    /**
+     * Инициализация нового состояния, в котором будет находиться новая задача
+     */
     const [value, setValue] = useState('');
 
-
+    /**
+     * Функция добавления новой задачи
+     */
     const addTodo = () => {
         if (!value || /^\s*$/.test(value)) {
             return;
@@ -21,6 +33,9 @@ const AddTodo = ({setTodo, todo}) => {
         setValue('');
     };
 
+    /**
+     * JSX, в котором есть поле ввода и кнопка добавить
+     */
     return (
         <>
             <input

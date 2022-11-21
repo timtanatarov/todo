@@ -1,24 +1,44 @@
 import React, { useState, useEffect, useRef } from "react";
 import UploadService from "../services/FileUploadService";
 
-const UploadFiles = () => {
+/**
+ * Функциональная компонента, в которой реализуется загрузка файлов в задачу
+ * @returns {JSX.Element}
+ */
+const FilesUpload = () => {
+    /**
+     * Инициализация состояний взаимодействия работы с файлами
+     */
     const [selectedFiles, setSelectedFiles] = useState(undefined);
     const [progressInfos, setProgressInfos] = useState({ val: [] });
     const [message, setMessage] = useState([]);
     const [fileInfos, setFileInfos] = useState([]);
     const progressInfosRef = useRef(null)
 
+    /**
+     * Функция, которая отправляет запрос на получение файлов
+     */
     useEffect(() => {
         UploadService.getFiles().then((response) => {
             setFileInfos(response.data);
         });
     }, []);
 
+    /**
+     * Функция выбора файлов
+     * @param event - событие, из таргета берутся файлы
+     */
     const selectFiles = (event) => {
         setSelectedFiles(event.target.files);
         setProgressInfos({ val: [] });
     };
 
+    /**
+     * Функция отправки файла
+     * @param idx – id файла
+     * @param file - файл
+     * @returns {Promise<AxiosResponse<*>>} - запрос на сервер, который отправляет файл на сервер
+     */
     const upload = (idx, file) => {
         let _progressInfos = [...progressInfosRef.current.val];
         return UploadService.upload(file, (event) => {
@@ -44,6 +64,10 @@ const UploadFiles = () => {
             });
     };
 
+    /**
+     * Функция отправки нескольких файлов, включающая в себя промис, в котором реализуется метод
+     * из 'FileUploadService' getFile
+     */
     const uploadFiles = () => {
         const files = Array.from(selectedFiles);
 
@@ -64,6 +88,9 @@ const UploadFiles = () => {
         setMessage([]);
     };
 
+    /**
+     * JSX, в котором конструируется финальный интерфейс прикрепления файлов к задаче
+     */
     return (
         <div>
             {progressInfos && progressInfos.val.length > 0 &&
@@ -126,4 +153,4 @@ const UploadFiles = () => {
     );
 };
 
-export default UploadFiles;
+export default FilesUpload;
