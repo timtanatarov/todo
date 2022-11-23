@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import FilesUpload from "../FilesUpload";
+import FileUpload from "../FileUploader/FileUploader";
 
 /**
  * Функциональная компонента, в которой находится весь todo-лист
@@ -114,6 +114,7 @@ const TodoList = ({todo, setTodo}) => {
      * поля изменения заголовка или описания задачи
      * Также есть кнопка завершнения задачи, при её нажатии задача перечеркивается, внизу появляется время завершения
      */
+
     return (
         <>
             {
@@ -186,7 +187,7 @@ const TodoList = ({todo, setTodo}) => {
                                             </div>
                                     }
                                     <div>
-                                        <FilesUpload />
+                                        <FileUpload/>
                                     </div>
 
                                 </div>
